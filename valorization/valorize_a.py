@@ -18,17 +18,15 @@ def main():
     for col in df.columns: 
         df[col] = [(float(i.replace(",", "")) if i != "-" else 0.0) if isinstance(i, str) else i for i in df[col]]
 
+    labels = ["total", "actual", "presidential", "rules", "proposed_rules", "notices"]
+
     not_accumulated = {
-        "total": df["total"].to_list(),
-        "actual": df["actual"].to_list(),
-        "presidential": df["presidential"].to_list(),
-        "rules": df["rules"].to_list(),
+        label: df[label].to_list()
+        for label in labels
     }
     accumulated = {
-        "total": to_accumulated(df["total"]),
-        "actual": to_accumulated(df["actual"]),
-        "presidential": to_accumulated(df["presidential"]),
-        "rules": to_accumulated(df["rules"])
+        label: to_accumulated(df[label])
+        for label in labels
     }
     
     print(df)

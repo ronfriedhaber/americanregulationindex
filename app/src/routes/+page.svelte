@@ -12,7 +12,7 @@
     const descriptions = [
         "Total unfiltered pages of federal regulation added per year. Since 1936",
         "Junk-filtered total pages of federal regulation added per year. Since 1975",
-        "Category-based pages of federal regulation added per year. Since 1975",
+        "Category-based pages of federal regulation added per year. Since 1975t ",
     ];
 
     function set_chart(series) {
@@ -53,7 +53,8 @@
                 series_i = [
                     { name: "presidential", data: data[acc_i]["presidential"] },
                     { name: "rules", data: data[acc_i]["rules"] },
-                    // { name: "actual", data: data[acc_i]["actual"] },
+                    { name: "proposed_rules", data: data[acc_i]["proposed_rules"] },
+                    { name: "notices", data: data[acc_i]["notices"] },
                 ];
             }
 
