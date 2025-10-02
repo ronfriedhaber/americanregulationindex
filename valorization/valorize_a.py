@@ -22,11 +22,13 @@ def main():
         "total": df["total"].to_list(),
         "actual": df["actual"].to_list(),
         "presidential": df["presidential"].to_list(),
+        "rules": df["rules"].to_list(),
     }
     accumulated = {
         "total": to_accumulated(df["total"]),
         "actual": to_accumulated(df["actual"]),
-        "presidential": to_accumulated(df["presidential"])
+        "presidential": to_accumulated(df["presidential"]),
+        "rules": to_accumulated(df["rules"])
     }
     
     print(df)

@@ -10,12 +10,12 @@
     let chart;
 
     const descriptions = [
-        "Total unfiltered pages of federal regulation added per year. Since 1396",
-        "Junk-filtered total pages of federal regulation added per year.",
-        "Category-based pages of federal regulation added per year.",
+        "Total unfiltered pages of federal regulation added per year. Since 1936",
+        "Junk-filtered total pages of federal regulation added per year. Since 1975",
+        "Category-based pages of federal regulation added per year. Since 1975",
     ];
 
-    onMount(() => {
+    function set_chart(series) {
         chart = Highcharts.chart(ele, {
             // chart: {
             //     type: "bar",
@@ -32,14 +32,11 @@
                     text: "#",
                 },
             },
-            series: [
-                {
-                    name: "#",
-                    data: data["not_accumulated"]["total"],
-                },
-            ],
+            series:series 
         });
+    }
 
+    onMount(() => {
         ix.subscribe((y) => {
             let series_i = [];
             let acc_i = "not_accumulated";
@@ -55,11 +52,12 @@
             if (y == 2) {
                 series_i = [
                     { name: "presidential", data: data[acc_i]["presidential"] },
-                    { name: "actual", data: data[acc_i]["actual"] },
+                    { name: "rules", data: data[acc_i]["rules"] },
+                    // { name: "actual", data: data[acc_i]["actual"] },
                 ];
             }
 
-            chart.update({ series: series_i });
+            set_chart(series_i)
         });
     });
 </script>
