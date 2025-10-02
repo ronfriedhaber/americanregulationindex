@@ -34,15 +34,15 @@
             <a class="underline" href="/datasources">Data Sources</a>
         </div>
 
-        <div class="grid gap-4 border p-1 w-full">
+        <div class="grid gap-4 border border-zinc-900 p-1 w-full">
             <div class="grid grid-cols-3">
-                <button class="px-1 py-1 border border-zinc-400"
+                <button class="px-1 py-1 border border-zinc-400 border-zinc-900 hover:bg-zinc-800"
                     >FED RATE 10</button
                 >
-                <button class="px-1 py-1 border border-zinc-400"
+                <button class="px-1 py-1 border border-zinc-400  border-zinc-900 hover:bg-zinc-800"
                     >FED RATE 20</button
                 >
-                <button class="px-1 py-1 border border-zinc-400"
+                <button class="px-1 py-1 border border-zinc-400 border-zinc-900  hover:bg-zinc-800"
                     >FED RATE 30</button
                 >
             </div>
