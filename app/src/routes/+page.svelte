@@ -9,6 +9,12 @@
     const accumulated = writable(false);
     let chart;
 
+    const descriptions = [
+        "Total unfiltered pages of federal regulation added per year. Since 1396",
+        "Junk-filtered total pages of federal regulation added per year.",
+        "Category-based pages of federal regulation added per year.",
+    ];
+
     onMount(() => {
         chart = Highcharts.chart(ele, {
             // chart: {
@@ -31,8 +37,29 @@
                     name: "#",
                     data: data["not_accumulated"]["total"],
                 },
-             
             ],
+        });
+
+        ix.subscribe((y) => {
+            let series_i = [];
+            let acc_i = "not_accumulated";
+
+            console.log(y);
+
+            if (y == 0) {
+                series_i = [{ name: "Total", data: data[acc_i]["total"] }];
+            }
+            if (y == 1) {
+                series_i = [{ name: "Actual", data: data[acc_i]["actual"] }];
+            }
+            if (y == 2) {
+                series_i = [
+                    { name: "presidential", data: data[acc_i]["presidential"] },
+                    { name: "actual", data: data[acc_i]["actual"] },
+                ];
+            }
+
+            chart.update({ series: series_i });
         });
     });
 </script>
@@ -102,13 +129,9 @@
             </div>
 
             <div class="grid grid-cols-7 gap-x-4">
-                <p class="col-span-3">
-                    Index measuring total number of pages added to Federal Code
-                    per year.
+                <p class="col-span-6">
+                    {descriptions[$ix]}
                 </p>
-                
-                <p class="text-right text-zinc-400">SINCE: 1936</p>
-                <p class="text-left text-zinc-400 col-span-2">SINCE ENHANCED: 2005</p>
 
                 <button
                     class="text-zinc-400 underline hover:text-zinc-300"
