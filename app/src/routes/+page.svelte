@@ -2,6 +2,8 @@
     import { onMount } from "svelte";
     import { writable } from "svelte/store";
 
+    import data from "$lib/data/a.json";
+
     export let ele;
     const ix = writable(0);
     const accumulated = writable(false);
@@ -17,22 +19,19 @@
                 text: null,
             },
             xAxis: {
-                categories: ["Apples", "Bananas", "Oranges"],
+                categories: data["x_axis"],
             },
             yAxis: {
                 title: {
-                    text: "Fruit eaten",
+                    text: "#",
                 },
             },
             series: [
                 {
-                    name: "Jane",
-                    data: [1, 0, 4],
+                    name: "#",
+                    data: data["not_accumulated"]["total"],
                 },
-                {
-                    name: "John",
-                    data: [5, 7, 3],
-                },
+             
             ],
         });
     });
@@ -103,13 +102,13 @@
             </div>
 
             <div class="grid grid-cols-7 gap-x-4">
-                <p class="col-span-4">
+                <p class="col-span-3">
                     Index measuring total number of pages added to Federal Code
                     per year.
                 </p>
-
-                <p class="text-right text-zinc-400">SINCE: 1936-01-01</p>
-                <p class="text-right text-zinc-400">UNTIL: 1936-01-01</p>
+                
+                <p class="text-right text-zinc-400">SINCE: 1936</p>
+                <p class="text-left text-zinc-400 col-span-2">SINCE ENHANCED: 2005</p>
 
                 <button
                     class="text-zinc-400 underline hover:text-zinc-300"
