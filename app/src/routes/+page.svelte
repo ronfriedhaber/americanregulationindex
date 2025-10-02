@@ -1,3 +1,46 @@
+<script>
+    import { onMount } from "svelte";
+    import { writable } from "svelte/store";
+
+    export let ele;
+    const ix = writable(0);
+    const accumulated = writable(false);
+    let chart;
+
+    onMount(() => {
+        chart = Highcharts.chart(ele, {
+            // chart: {
+            //     type: "bar",
+            // },
+            chart: { backgroundColor: "black" },
+            title: {
+                text: null,
+            },
+            xAxis: {
+                categories: ["Apples", "Bananas", "Oranges"],
+            },
+            yAxis: {
+                title: {
+                    text: "Fruit eaten",
+                },
+            },
+            series: [
+                {
+                    name: "Jane",
+                    data: [1, 0, 4],
+                },
+                {
+                    name: "John",
+                    data: [5, 7, 3],
+                },
+            ],
+        });
+    });
+</script>
+
+<p class="fixed top-2 right-2 text-xs text-zinc-400">
+    LAST UPDATED: OCTOBER 2025
+</p>
 <div class="h-full">
     <div class="flex flex-col place-items-center h-full p-2 gap-16 py-16 px-16">
         <div class="grid gap-8">
@@ -36,25 +79,53 @@
 
         <div class="grid gap-4 border border-zinc-900 p-1 w-full">
             <div class="grid grid-cols-3">
-                <button class="px-1 py-1 border border-zinc-400 border-zinc-900 hover:bg-zinc-800"
-                    >FED RATE 10</button
+                <button
+                    on:click={() => {
+                        ix.set(0);
+                    }}
+                    class="px-1 py-1 border border-zinc-400 border-zinc-900 hover:bg-zinc-800"
+                    >TOTAL PAGES</button
                 >
-                <button class="px-1 py-1 border border-zinc-400  border-zinc-900 hover:bg-zinc-800"
-                    >FED RATE 20</button
+                <button
+                    on:click={() => {
+                        ix.set(1);
+                    }}
+                    class="px-1 py-1 border border-zinc-400 border-zinc-900 hover:bg-zinc-800"
+                    >PAGES ACTUAL</button
                 >
-                <button class="px-1 py-1 border border-zinc-400 border-zinc-900  hover:bg-zinc-800"
-                    >FED RATE 30</button
+                <button
+                    on:click={() => {
+                        ix.set(2);
+                    }}
+                    class="px-1 py-1 border border-zinc-400 border-zinc-900 hover:bg-zinc-800"
+                    >PAGES PER CATEGORY</button
                 >
             </div>
 
-            <div class="grid grid-cols-6">
+            <div class="grid grid-cols-7 gap-x-4">
                 <p class="col-span-4">
                     Index measuring total number of pages added to Federal Code
                     per year.
                 </p>
+
                 <p class="text-right text-zinc-400">SINCE: 1936-01-01</p>
                 <p class="text-right text-zinc-400">UNTIL: 1936-01-01</p>
+
+                <button
+                    class="text-zinc-400 underline hover:text-zinc-300"
+                    on:click={() => {
+                        accumulated.set(!$accumulated);
+                    }}
+                >
+                    {#if $accumulated}
+                        YES ACCUMMULATED
+                    {:else}
+                        NOT ACCUMULATED
+                    {/if}
+                </button>
             </div>
+
+            <div bind:this={ele}></div>
         </div>
     </div>
 </div>
