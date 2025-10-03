@@ -32,7 +32,7 @@
                     text: "#",
                 },
             },
-            series:series 
+            series: series,
         });
     }
 
@@ -53,15 +53,24 @@
                 series_i = [
                     { name: "presidential", data: data[acc_i]["presidential"] },
                     { name: "rules", data: data[acc_i]["rules"] },
-                    { name: "proposed_rules", data: data[acc_i]["proposed_rules"] },
+                    {
+                        name: "proposed_rules",
+                        data: data[acc_i]["proposed_rules"],
+                    },
                     { name: "notices", data: data[acc_i]["notices"] },
                 ];
             }
 
-            set_chart(series_i)
+            set_chart(series_i);
         });
     });
 </script>
+
+<div class="fixed top-2 left-2">
+    <div class="grid grid-flow-col w-full">
+        <img src="/src/lib/assets/eagle0.png" alt="" width="32px" height="32px" />
+    </div>
+</div>
 
 <p class="fixed top-2 right-2 text-xs text-zinc-400">
     LAST UPDATED: OCTOBER 2025
@@ -83,7 +92,9 @@
                 constucteed.
             </p>
             <p class="w-[80ch] text-zinc-400">
-                DISCLAIMER: While the Site's codebase is completely Open Source, and strive towards complete data correctness; Data presented may by incorrect, flawed, skewed, or outright wrong.  
+                DISCLAIMER: While the Site's codebase is completely Open Source,
+                and strive towards complete data correctness; Data presented may
+                by incorrect, flawed, skewed, or outright wrong.
             </p>
             <p></p>
         </div>
