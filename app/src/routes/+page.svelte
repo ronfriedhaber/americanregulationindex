@@ -67,7 +67,7 @@
     LAST UPDATED: OCTOBER 2025
 </p>
 <div class="h-full">
-    <div class="flex flex-col place-items-center h-full p-2 gap-16 py-16 px-16">
+    <div class="grid place-items-center h-full p-2 gap-16 py-16 px-16">
         <div class="grid gap-8">
             <p class="text-2xl text-center">
                 (UNOFFICAL) American Regulation Index
@@ -82,6 +82,10 @@
                 constructing the building blocks upon which the Site is
                 constucteed.
             </p>
+            <p class="w-[80ch] text-zinc-400">
+                DISCLAIMER: While the Site's codebase is completely Open Source, and strive towards complete data correctness; Data presented may by incorrect, flawed, skewed, or outright wrong.  
+            </p>
+            <p></p>
         </div>
 
         <div class="grid grid-cols-3 gap-x-8 text-center">
@@ -99,7 +103,7 @@
                 href="https://github.com/ronfriedhaber/americanregulationindex"
                 >Code</a
             >
-            <a class="underline" href="/datasources">Data Sources</a>
+            <a class="underline" href="/datasources">Data Source</a>
         </div>
 
         <div class="grid gap-4 border border-zinc-900 p-1 w-full">
