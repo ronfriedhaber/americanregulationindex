@@ -19,9 +19,9 @@
         const opts = {
             chart: {
                 backgroundColor: "black",
-                reflow: true,              // let HC auto-fit to container
+                reflow: true, // let HC auto-fit to container
                 spacing: [8, 8, 8, 8],
-                style: { fontFamily: "ui-sans-serif, system-ui" }
+                style: { fontFamily: "ui-sans-serif, system-ui" },
             },
             title: { text: null },
             credits: { enabled: false },
@@ -30,20 +30,20 @@
                 categories: data["x_axis"],
                 labels: {
                     style: { color: "#a1a1aa" },
-                    step:  Math.ceil(data["x_axis"].length / 8) // avoid crowding
+                    step: Math.ceil(data["x_axis"].length / 8), // avoid crowding
                 },
                 lineColor: "#27272a",
-                tickColor: "#27272a"
+                tickColor: "#27272a",
             },
             yAxis: {
                 title: { text: null },
                 labels: { style: { color: "#a1a1aa" } },
-                gridLineColor: "#27272a"
+                gridLineColor: "#27272a",
             },
             tooltip: {
                 backgroundColor: "#18181b",
                 borderColor: "#3f3f46",
-                style: { color: "#e4e4e7" }
+                style: { color: "#e4e4e7" },
             },
             series,
             responsive: {
@@ -52,11 +52,15 @@
                         condition: { maxWidth: 640 },
                         chartOptions: {
                             legend: { enabled: true },
-                            xAxis: { labels: { step: Math.ceil(data["x_axis"].length / 4) } }
-                        }
-                    }
-                ]
-            }
+                            xAxis: {
+                                labels: {
+                                    step: Math.ceil(data["x_axis"].length / 4),
+                                },
+                            },
+                        },
+                    },
+                ],
+            },
         };
 
         chart = Highcharts.chart(ele, opts);
@@ -102,7 +106,7 @@
             set_chart(series_i);
         } else {
             while (chart.series.length) chart.series[0].remove(false);
-            series_i.forEach(s => chart.addSeries(s, false));
+            series_i.forEach((s) => chart.addSeries(s, false));
             chart.redraw();
         }
     }
@@ -111,46 +115,75 @@
 <!-- Fixed bits with safe-area padding and no overflow -->
 <div class="fixed top-2 left-2 p-safe">
     <div class="grid grid-flow-col">
-        <img src="/src/lib/assets/eagle0.png" alt="Eagle"
-             class="w-7 h-7 sm:w-8 sm:h-8 object-contain" />
+        <img
+            src="/src/lib/assets/eagle0.png"
+            alt="Eagle"
+            class="w-7 h-7 sm:w-8 sm:h-8 object-contain"
+        />
     </div>
 </div>
 
-<p class="fixed top-2 right-2 p-safe text-[10px] sm:text-xs text-zinc-400 truncate max-w-[50vw] sm:max-w-none">
+<p
+    class="fixed top-2 right-2 p-safe text-[10px] sm:text-xs text-zinc-400 truncate max-w-[50vw] sm:max-w-none"
+>
     LAST UPDATED: OCTOBER 2025
 </p>
 
 <!-- Page container -->
 <div class="min-h-screen w-full overflow-x-hidden">
-    <div class="grid place-items-center min-h-screen gap-10 sm:gap-14 px-4 sm:px-6 lg:px-16 py-16">
+    <div
+        class="grid place-items-center min-h-screen gap-10 sm:gap-14 px-4 sm:px-6 lg:px-16 py-16"
+    >
         <!-- Title & intro -->
         <div class="grid gap-4 sm:gap-6 text-center">
             <p class="text-xl sm:text-2xl">
                 (UNOFFICIAL) American Regulation Index
             </p>
 
-            <p class="mx-auto max-w-prose text-sm sm:text-base text-zinc-200 leading-relaxed">
-                Is overregulation the root of stagnation? What is regulation correlated with?
-                By constructing a polished, quantitative index derived from federal data sources,
-                this micro-project aims to provide at least a partial answer to those questions and more.
-                Thanks to the Federal Reserve for constructing the building blocks upon which the site is built.
+            <p
+                class="mx-auto max-w-prose text-sm sm:text-base text-zinc-200 text-left leading-relaxed"
+            >
+                Is overregulation the root of stagnation? What is regulation
+                correlated with? This project builds a polished, quantitative
+                index from federal data sources to provide a clearer view of
+                regulatory growth and its possible implications. It’s not a
+                final word, but a small tool to explore how regulation has taken
+                shape over time. Combined with approximate Public Debt and Currency In Circulation. 
+                <br/>
+                <br/>
+                In essence, the following three charts provide an at least partial causation to Thiel's long-vindicated stagnation argument. A stark quantifiable increase in regulation, revocation of the Bretton Woods system and parabolic Public Debt. 
+
             </p>
 
-            <p class="mx-auto max-w-prose text-xs sm:text-sm text-zinc-400 leading-relaxed">
-                DISCLAIMER: While the site's codebase is completely open source and we strive for complete data correctness,
-                data presented may be incorrect, flawed, skewed, or outright wrong.
+            <p
+                class="mx-auto max-w-prose text-xs sm:text-sm text-zinc-400 text-left leading-relaxed"
+            >
+                DISCLAIMER: While the site’s codebase is open source and the
+                data is drawn from federal sources, accuracy cannot be
+                guaranteed. The information presented may contain errors,
+                omissions, or biases and should be treated as exploratory rather
+                than authoritative.
             </p>
         </div>
 
         <!-- Links -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-x-8 text-center w-full max-w-3xl">
-            <span>Made By
-                <a class="underline break-all" href="https://x.com/ronfriedhaber">
+        <div
+            class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-x-8 text-center w-full max-w-3xl"
+        >
+            <span
+                >Made By
+                <a
+                    class="underline break-all"
+                    href="https://x.com/ronfriedhaber"
+                >
                     Ron Friedhaber
                 </a>
             </span>
 
-            <a class="underline break-all" href="https://github.com/ronfriedhaber/americanregulationindex">
+            <a
+                class="underline break-all"
+                href="https://github.com/ronfriedhaber/americanregulationindex"
+            >
                 Code
             </a>
 
@@ -158,27 +191,34 @@
         </div>
 
         <!-- Card -->
-        <div class="grid gap-4 border border-zinc-800/80 rounded-md p-2 sm:p-3 w-full max-w-7xl bg-black/20">
+        <div
+            class="grid gap-4 border border-zinc-800/80 rounded-md p-2 sm:p-3 w-full max-w-7xl bg-black/20"
+        >
             <!-- Tabs -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
                 <button
                     on:click={() => ix.set(0)}
                     class="px-2 py-2 border border-zinc-900 hover:bg-zinc-800 rounded text-sm"
-                >TOTAL PAGES</button>
+                    >TOTAL PAGES</button
+                >
 
                 <button
                     on:click={() => ix.set(1)}
                     class="px-2 py-2 border border-zinc-900 hover:bg-zinc-800 rounded text-sm"
-                >PAGES ACTUAL</button>
+                    >PAGES ACTUAL</button
+                >
 
                 <button
                     on:click={() => ix.set(2)}
                     class="px-2 py-2 border border-zinc-900 hover:bg-zinc-800 rounded text-sm"
-                >PAGES PER CATEGORY</button>
+                    >PAGES PER CATEGORY</button
+                >
             </div>
 
             <!-- Description + toggle -->
-            <div class="grid grid-cols-1 sm:grid-cols-7 gap-3 sm:gap-x-4 items-start">
+            <div
+                class="grid grid-cols-1 sm:grid-cols-7 gap-3 sm:gap-x-4 items-start"
+            >
                 <p class="sm:col-span-6 text-sm sm:text-base text-zinc-200">
                     {descriptions[$ix]}
                 </p>
@@ -197,11 +237,11 @@
 
             <!-- Chart: fluid, non-overflowing -->
             <div class="w-full overflow-hidden">
-                <div
-                    bind:this={chartEl}
-                    class="w-full max-w-full"
-                >
-                    <div bind:this={ele} class="w-full min-h-[320px] sm:min-h-[420px]"></div>
+                <div bind:this={chartEl} class="w-full max-w-full">
+                    <div
+                        bind:this={ele}
+                        class="w-full min-h-[320px] sm:min-h-[420px]"
+                    ></div>
                 </div>
             </div>
         </div>
@@ -210,5 +250,8 @@
 
 <style>
     /* iOS safe-area utility (if Tailwind’s plugin not present) */
-    .p-safe { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+    .p-safe {
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+    }
 </style>
