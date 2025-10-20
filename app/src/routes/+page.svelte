@@ -3,15 +3,20 @@
     import { writable, get } from "svelte/store";
     import data from "$lib/data/a.json";
     import data2 from "$lib/data/b.json";
+    import data3 from "$lib/data/c.json";
 
     export let ele; // chart target
     export let ele2; // chart target
+    export let ele3; // chart target
     const ix = writable(0);
     const accumulated = writable(false);
     let chart;
     let chart2;
+    let chart3;
+
     let chartEl; // bound container
     let chartEl2; // bound container
+    let chartEl3; // bound container
 
     const descriptions = [
         "Total unfiltered pages of federal regulation added per year. Since 1936",
@@ -70,8 +75,8 @@
         chart = Highcharts.chart(ele, opts);
     }
 
-    onMount(() => {
-        const opts2 = {
+    function build_standard_options_once(series) {
+        return {
             chart: {
                 backgroundColor: "black",
                 reflow: true, // let HC auto-fit to container
@@ -100,12 +105,7 @@
                 borderColor: "#3f3f46",
                 style: { color: "#e4e4e7" },
             },
-            series: [
-                {
-                    name: "Currency In Circulation",
-                    data: data2["not_accumulated"]["CURRCIR"],
-                },
-            ],
+            series: series,
             responsive: {
                 rules: [
                     {
@@ -122,11 +122,31 @@
                 ],
             },
         };
+    }
+
+    onMount(() => {
         // initial render
         const y = get(ix);
         updateSeries(y);
 
-        chart2 = Highcharts.chart(ele2, opts2);
+        chart2 = Highcharts.chart(
+            ele2,
+            build_standard_options_once([
+                {
+                    name: "Currency In Circulation",
+                    data: data2["not_accumulated"]["CURRCIR"],
+                },
+            ]),
+        );
+        chart3 = Highcharts.chart(
+            ele3,
+            build_standard_options_once([
+                {
+                    name: "Public Debt",
+                    data: data3["not_accumulated"]["GFDEBTN"],
+                },
+            ]),
+        );
 
         // update on tab switch
         ix.subscribe(updateSeries);
@@ -303,13 +323,33 @@
                 class="grid grid-cols-1 sm:grid-cols-7 gap-3 sm:gap-x-4 items-start"
             >
                 <p class="sm:col-span-6 text-sm sm:text-base text-zinc-200">
-                   Currency In Circulation Index (Adjusted), Since 1936 
+                    Currency In Circulation Index (Adjusted), Since 1936
                 </p>
             </div>
             <div class="w-full overflow-hidden">
                 <div bind:this={chartEl2} class="w-full max-w-full">
                     <div
                         bind:this={ele2}
+                        class="w-full min-h-[320px] sm:min-h-[420px]"
+                    ></div>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="grid gap-4 border border-zinc-800/80 rounded-md p-2 sm:p-3 w-full max-w-7xl bg-black/20"
+        >
+            <div
+                class="grid grid-cols-1 sm:grid-cols-7 gap-3 sm:gap-x-4 items-start"
+            >
+                <p class="sm:col-span-6 text-sm sm:text-base text-zinc-200">
+                    Total Public Debt (Non-Inflation Adjusted), Since 1936
+                </p>
+            </div>
+            <div class="w-full overflow-hidden">
+                <div bind:this={chartEl3} class="w-full max-w-full">
+                    <div
+                        bind:this={ele3}
                         class="w-full min-h-[320px] sm:min-h-[420px]"
                     ></div>
                 </div>
