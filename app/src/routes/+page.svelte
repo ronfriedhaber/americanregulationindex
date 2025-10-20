@@ -5,9 +5,12 @@
     import data2 from "$lib/data/b.json";
     import data3 from "$lib/data/c.json";
 
+    import eagle from "$lib/assets/eagle0.png";
+
     export let ele; // chart target
     export let ele2; // chart target
     export let ele3; // chart target
+
     const ix = writable(0);
     const accumulated = writable(false);
     let chart;
@@ -195,7 +198,7 @@
 <div class="fixed top-2 left-2 p-safe">
     <div class="grid grid-flow-col">
         <img
-            src="/src/lib/assets/eagle0.png"
+            src={eagle}
             alt="Eagle"
             class="w-7 h-7 sm:w-8 sm:h-8 object-contain"
         />
