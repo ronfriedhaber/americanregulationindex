@@ -9,6 +9,6 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-<main class="w-screen h-screen bg-zinc-950 text-zinc-200 p-2 font-serif">
+<main class="w-screen min-h-screen bg-zinc-950 text-zinc-200 p-2 font-serif">
 	{@render children?.()}
 </main>
