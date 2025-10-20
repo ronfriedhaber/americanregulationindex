@@ -4,10 +4,13 @@
     import data from "$lib/data/a.json";
 
     export let ele; // chart target
+    export let ele2; // chart target
     const ix = writable(0);
     const accumulated = writable(false);
     let chart;
+    let chart2;
     let chartEl; // bound container
+    let chartEl2; // bound container
 
     const descriptions = [
         "Total unfiltered pages of federal regulation added per year. Since 1936",
@@ -148,11 +151,14 @@
                 index from federal data sources to provide a clearer view of
                 regulatory growth and its possible implications. It’s not a
                 final word, but a small tool to explore how regulation has taken
-                shape over time. Combined with approximate Public Debt and Currency In Circulation. 
-                <br/>
-                <br/>
-                In essence, the following three charts provide an at least partial causation to Thiel's long-vindicated stagnation argument. A stark quantifiable increase in regulation, revocation of the Bretton Woods system and parabolic Public Debt. 
-
+                shape over time. Combined with approximate Public Debt and
+                Currency In Circulation.
+                <br />
+                <br />
+                In essence, the following three charts provide an at least partial
+                causation to Thiel's long-vindicated stagnation argument. A stark
+                quantifiable increase in regulation, revocation of the Bretton Woods
+                system and parabolic Public Debt.
             </p>
 
             <p
@@ -244,6 +250,15 @@
                     ></div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="w-full overflow-hidden">
+        <div bind:this={chartEl2} class="w-full max-w-full">
+            <div
+                bind:this={ele2}
+                class="w-full min-h-[320px] sm:min-h-[420px]"
+            ></div>
         </div>
     </div>
 </div>

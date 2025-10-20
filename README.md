@@ -1,1 +1,1 @@
-# americanregulationindex.com
+# American Regulation Index
