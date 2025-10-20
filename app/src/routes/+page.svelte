@@ -2,6 +2,7 @@
     import { onMount } from "svelte";
     import { writable, get } from "svelte/store";
     import data from "$lib/data/a.json";
+    import data2 from "$lib/data/b.json";
 
     export let ele; // chart target
     export let ele2; // chart target
@@ -70,9 +71,62 @@
     }
 
     onMount(() => {
+        const opts2 = {
+            chart: {
+                backgroundColor: "black",
+                reflow: true, // let HC auto-fit to container
+                spacing: [8, 8, 8, 8],
+                style: { fontFamily: "ui-sans-serif, system-ui" },
+            },
+            title: { text: null },
+            credits: { enabled: false },
+            legend: { itemStyle: { color: "#e4e4e7" } },
+            xAxis: {
+                categories: data2["x_axis"],
+                labels: {
+                    style: { color: "#a1a1aa" },
+                    step: Math.ceil(data2["x_axis"].length / 8), // avoid crowding
+                },
+                lineColor: "#27272a",
+                tickColor: "#27272a",
+            },
+            yAxis: {
+                title: { text: null },
+                labels: { style: { color: "#a1a1aa" } },
+                gridLineColor: "#27272a",
+            },
+            tooltip: {
+                backgroundColor: "#18181b",
+                borderColor: "#3f3f46",
+                style: { color: "#e4e4e7" },
+            },
+            series: [
+                {
+                    name: "Currency In Circulation",
+                    data: data2["not_accumulated"]["CURRCIR"],
+                },
+            ],
+            responsive: {
+                rules: [
+                    {
+                        condition: { maxWidth: 640 },
+                        chartOptions: {
+                            legend: { enabled: true },
+                            xAxis: {
+                                labels: {
+                                    step: Math.ceil(data2["x_axis"].length / 4),
+                                },
+                            },
+                        },
+                    },
+                ],
+            },
+        };
         // initial render
         const y = get(ix);
         updateSeries(y);
+
+        chart2 = Highcharts.chart(ele2, opts2);
 
         // update on tab switch
         ix.subscribe(updateSeries);
@@ -80,8 +134,10 @@
         // reflow chart on container resize
         const ro = new ResizeObserver(() => {
             if (chart) chart.reflow();
+            if (chart2) chart2.reflow();
         });
         if (chartEl) ro.observe(chartEl);
+        if (chartEl2) ro.observe(chartEl2);
 
         // cleanup
         return () => ro.disconnect();
@@ -228,17 +284,6 @@
                 <p class="sm:col-span-6 text-sm sm:text-base text-zinc-200">
                     {descriptions[$ix]}
                 </p>
-
-                <button
-                    class="justify-self-start sm:justify-self-end text-xs sm:text-sm text-zinc-400 underline hover:text-zinc-300"
-                    on:click={() => accumulated.set(!$accumulated)}
-                >
-                    {#if $accumulated}
-                        YES ACCUMULATED
-                    {:else}
-                        NOT ACCUMULATED
-                    {/if}
-                </button>
             </div>
 
             <!-- Chart: fluid, non-overflowing -->
@@ -251,14 +296,24 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="w-full overflow-hidden">
-        <div bind:this={chartEl2} class="w-full max-w-full">
+        <div
+            class="grid gap-4 border border-zinc-800/80 rounded-md p-2 sm:p-3 w-full max-w-7xl bg-black/20"
+        >
             <div
-                bind:this={ele2}
-                class="w-full min-h-[320px] sm:min-h-[420px]"
-            ></div>
+                class="grid grid-cols-1 sm:grid-cols-7 gap-3 sm:gap-x-4 items-start"
+            >
+                <p class="sm:col-span-6 text-sm sm:text-base text-zinc-200">
+                   Currency In Circulation Index (Adjusted), Since 1936 
+                </p>
+            </div>
+            <div class="w-full overflow-hidden">
+                <div bind:this={chartEl2} class="w-full max-w-full">
+                    <div
+                        bind:this={ele2}
+                        class="w-full min-h-[320px] sm:min-h-[420px]"
+                    ></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
